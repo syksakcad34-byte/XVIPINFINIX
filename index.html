@@ -3,452 +3,676 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>01_infinix | Pro Gaming Phones</title>
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Biz Haqimizda | 01_iphones - Pro Gaming Smartfonlar</title>
     
+    <!-- Google Fonts: Orbitron & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
+        /* ==========================================================================
+           1. CORE DESIGN SYSTEM & VARIABLES
+           ========================================================================== */
         :root {
-            --primary: #00ff66;
-            --secondary: #00e5ff;
-            --dark: #0a0b10;
-            --darker: #050508;
-            --accent: #ff0055;
-            --text: #ffffff;
-            --text-muted: #a0a5c0;
-            --glass: rgba(10, 11, 16, 0.85);
-            --border: rgba(0, 255, 102, 0.3);
+            --bg-main: #030407;
+            --bg-secondary: #0a0d14;
+            --bg-card: rgba(15, 20, 32, 0.75);
+            --bg-card-hover: rgba(22, 30, 48, 0.85);
+            --gold-primary: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.35);
+            --neon-green: #00ff88;
+            --neon-green-glow: rgba(0, 255, 136, 0.4);
+            --cyber-cyan: #00f0ff;
+            --cyber-cyan-glow: rgba(0, 240, 255, 0.3);
+            --apple-red: #ff3b30;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(255, 215, 0, 0.18);
+            --border-light: rgba(255, 255, 255, 0.08);
+            
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-gaming: 'Orbitron', sans-serif;
+            --font-sub: 'Rajdhani', sans-serif;
+            
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --container-width: 1360px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rajdhani', sans-serif;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
         body {
-            background-color: var(--darker);
-            color: var(--text);
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-main);
             overflow-x: hidden;
-            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Hacker Canvas Background */
-        #hacker-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: var(--darker);
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 255, 136, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-green); }
+
+        /* Canvas Background */
+        #cyber-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none; opacity: 0.6;
         }
 
-        /* Navigation */
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 28px; border-radius: 8px; font-family: var(--font-gaming);
+            font-size: 13px; font-weight: 800; text-transform: uppercase; cursor: pointer;
+            transition: var(--transition-smooth); border: none; text-decoration: none;
+        }
+        .btn-cyber { background: rgba(0,255,136,0.1); border: 1px solid var(--neon-green); color: var(--neon-green); }
+        .btn-cyber:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green-glow); transform: translateY(-2px); }
+        
+        .badge-title {
+            display: inline-block; padding: 6px 14px; border-radius: 30px;
+            background: rgba(0, 240, 255, 0.1); border: 1px solid var(--cyber-cyan);
+            color: var(--cyber-cyan); font-family: var(--font-gaming); font-size: 11px;
+            font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px;
+        }
+
+        /* ==========================================================================
+           2. HEADER
+           ========================================================================== */
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background: rgba(3, 4, 7, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
         }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        .nav-wrapper { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon {
+            width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-primary), var(--neon-green));
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: #000; font-size: 22px; box-shadow: 0 0 15px var(--gold-glow);
         }
+        .logo-text { font-family: var(--font-gaming); font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 2px; }
+        .logo-text span { color: var(--gold-primary); text-shadow: 0 0 10px var(--gold-glow); }
+        
+        nav ul { display: flex; gap: 36px; list-style: none; }
+        nav ul li a { font-family: var(--font-gaming); font-size: 13px; font-weight: 700; color: var(--text-secondary); text-decoration: none; padding: 8px 0; position: relative; transition: var(--transition-fast); }
+        nav ul li a:hover, nav ul li a.active { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green-glow); }
+        nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--neon-green); transition: var(--transition-fast); }
+        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
 
-        .logo span {
-            color: var(--secondary);
+        .cart-trigger {
+            background: rgba(0, 255, 136, 0.05); border: 1px solid var(--neon-green); padding: 10px 18px;
+            border-radius: 8px; color: var(--neon-green); font-family: var(--font-gaming); font-size: 13px;
+            font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: var(--transition-smooth);
         }
+        .cart-trigger:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green-glow); }
+        .cart-badge-count { background: var(--apple-red); color: #fff; font-size: 11px; padding: 2px 7px; border-radius: 20px; font-weight: 800; }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav ul li a {
-            font-family: 'Orbitron', sans-serif;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        nav ul li a:hover, nav ul li a.active {
-            color: var(--primary);
-            text-shadow: 0 0 8px var(--primary);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover::after, nav ul li a.active::after {
-            width: 100%;
-        }
-
-        .cart-btn {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 18px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cart-btn:hover {
-            background: var(--primary);
-            color: var(--darker);
-            box-shadow: 0 0 15px var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            position: relative;
-            margin-top: 60px;
-        }
-
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(0, 255, 102, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 5px 15px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
-        }
-
-        .hero h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 52px;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 span {
-            color: var(--secondary);
-            text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-        }
-
-        .btn-cyber {
-            background: var(--primary);
-            color: var(--darker);
-            padding: 14px 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 102, 0.4);
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .btn-cyber:hover {
-            background: transparent;
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            box-shadow: 0 0 30px var(--primary);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--secondary);
-            border: 1px solid var(--secondary);
-            padding: 14px 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: 0.3s;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-        }
-
-        .btn-outline:hover {
-            background: var(--secondary);
-            color: var(--darker);
-            box-shadow: 0 0 30px var(--secondary);
-        }
-
-        .hero-image {
-            position: relative;
-            z-index: 2;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .hero-image img {
-            max-width: 450px;
-            filter: drop-shadow(0 0 30px rgba(0, 255, 102, 0.3));
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-
-        /* Features Section */
-        .features {
-            padding: 80px 5%;
-            background: rgba(5, 5, 8, 0.9);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .section-title {
+        /* ==========================================================================
+           3. PAGE BANNER
+           ========================================================================== */
+        .page-banner {
+            padding: 150px 0 60px;
             text-align: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 50px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            background: radial-gradient(circle at center, rgba(0,240,255,0.08) 0%, transparent 70%);
+            border-bottom: 1px solid var(--border-light);
+        }
+        .page-banner h1 {
+            font-family: var(--font-gaming); font-size: 42px; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;
+        }
+        .page-banner h1 span { color: var(--cyber-cyan); text-shadow: 0 0 15px var(--cyber-cyan-glow); }
+        .page-banner p { color: var(--text-secondary); max-width: 650px; margin: 0 auto; font-size: 16px; line-height: 1.6; }
+
+        /* ==========================================================================
+           4. ABOUT STORY SECTION
+           ========================================================================== */
+        .story-section { padding: 90px 0; }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        
+        .story-content h2 { font-family: var(--font-gaming); font-size: 32px; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
+        .story-content h2 span { color: var(--gold-primary); }
+        .story-content p { color: var(--text-secondary); font-size: 15px; line-height: 1.8; margin-bottom: 20px; }
+        
+        .story-card-box {
+            position: relative; border-radius: 20px; padding: 30px;
+            background: linear-gradient(145deg, rgba(15, 20, 32, 0.9), rgba(5, 8, 15, 0.9));
+            border: 1px solid var(--cyber-cyan); box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+        }
+        .story-badge {
+            position: absolute; top: -15px; right: 30px; background: var(--gold-primary);
+            color: #000; font-family: var(--font-gaming); font-weight: 900; font-size: 12px;
+            padding: 6px 16px; border-radius: 20px; box-shadow: 0 0 15px var(--gold-glow);
         }
 
-        .section-title span {
-            color: var(--primary);
+        /* ==========================================================================
+           5. TESTING PROCESS (4-STEP QUALITY CHECK)
+           ========================================================================== */
+        .process-section { padding: 80px 0; background: rgba(10, 13, 20, 0.6); border-y: 1px solid var(--border-light); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-family: var(--font-gaming); font-size: 32px; font-weight: 900; text-transform: uppercase; }
+        
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+        .process-card {
+            background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 16px; padding: 30px 25px; position: relative;
+            transition: var(--transition-smooth); overflow: hidden;
         }
+        .process-card:hover { border-color: var(--neon-green); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 255, 136, 0.15); }
+        
+        .step-num {
+            font-family: var(--font-gaming); font-size: 48px; font-weight: 900;
+            color: rgba(255,255,255,0.05); position: absolute; top: 15px; right: 20px;
+            transition: var(--transition-fast);
+        }
+        .process-card:hover .step-num { color: rgba(0, 255, 136, 0.2); }
+        
+        .process-icon {
+            width: 50px; height: 50px; background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--neon-green); border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--neon-green); font-size: 22px; margin-bottom: 20px;
+        }
+        .process-card h3 { font-family: var(--font-gaming); font-size: 18px; margin-bottom: 10px; color: #fff; }
+        .process-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
+        /* ==========================================================================
+           6. STATS COUNTER SECTION
+           ========================================================================== */
+        .stats-section { padding: 70px 0; border-bottom: 1px solid var(--border-light); }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        .stat-item { background: var(--bg-card); border: 1px solid var(--border-light); padding: 35px 20px; border-radius: 16px; }
+        .stat-number { font-family: var(--font-gaming); font-size: 42px; font-weight: 900; color: var(--gold-primary); text-shadow: 0 0 15px var(--gold-glow); margin-bottom: 5px; }
+        .stat-label { font-size: 13px; color: var(--text-secondary); font-family: var(--font-gaming); text-transform: uppercase; letter-spacing: 1px; }
 
-        .feature-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 8px;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
+        /* ==========================================================================
+           7. TESTIMONIALS / ESPORTS AMBASSADORS
+           ========================================================================== */
+        .reviews-section { padding: 90px 0; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        .review-card {
+            background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 16px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between;
         }
+        .review-text { font-style: italic; color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 25px; }
+        .review-user { display: flex; align-items: center; gap: 15px; }
+        .user-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyber-cyan), var(--neon-green)); display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-family: var(--font-gaming); }
+        .user-info h4 { font-family: var(--font-gaming); font-size: 15px; color: #fff; }
+        .user-info p { font-size: 12px; color: var(--neon-green); font-weight: 600; }
 
-        .feature-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.2);
-            transform: translateY(-5px);
+        /* ==========================================================================
+           8. CONTACT & LOCATION SECTION
+           ========================================================================== */
+        .contact-section { padding: 80px 0 100px; }
+        .contact-box {
+            background: linear-gradient(135deg, rgba(10,13,20,0.95), rgba(15,20,32,0.85));
+            border: 1px solid var(--border-color); border-radius: 24px; padding: 50px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
         }
+        .contact-info h3 { font-family: var(--font-gaming); font-size: 28px; margin-bottom: 20px; color: #fff; }
+        .contact-info p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 30px; }
+        
+        .contact-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+        .contact-list li { display: flex; align-items: center; gap: 15px; font-size: 15px; color: #fff; }
+        .contact-list i { width: 40px; height: 40px; background: rgba(255,215,0,0.1); border: 1px solid var(--gold-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); }
 
-        .feature-card i {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        .tg-form { display: flex; flex-direction: column; gap: 15px; }
+        .tg-form input, .tg-form textarea {
+            background: rgba(0,0,0,0.5); border: 1px solid var(--border-light);
+            border-radius: 10px; padding: 14px 18px; color: #fff; font-family: var(--font-main);
+            font-size: 14px; outline: none; transition: var(--transition-fast);
         }
+        .tg-form input:focus, .tg-form textarea:focus { border-color: var(--neon-green); box-shadow: 0 0 10px rgba(0,255,136,0.2); }
+        
+        /* ==========================================================================
+           9. CART DRAWER (Shared Logic)
+           ========================================================================== */
+        .cart-drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 2000; opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
+        .cart-drawer-overlay.active { opacity: 1; pointer-events: all; }
+        .cart-drawer { position: fixed; top: 0; right: -450px; width: 100%; max-width: 440px; height: 100vh; background: #080a10; border-left: 1px solid var(--border-light); z-index: 2001; transition: var(--transition-smooth); display: flex; flex-direction: column; padding: 30px; box-shadow: -15px 0 40px rgba(0,0,0,0.8); }
+        .cart-drawer.active { right: 0; }
+        .cart-drawer-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .cart-drawer-header h3 { font-family: var(--font-gaming); font-size: 20px; color: var(--neon-green); display: flex; align-items: center; gap: 10px; }
+        .cart-close-btn { background: transparent; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; transition: var(--transition-fast); }
+        .cart-close-btn:hover { color: var(--apple-red); }
+        .cart-items-list { flex-grow: 1; overflow-y: auto; margin: 20px 0; display: flex; flex-direction: column; gap: 16px; padding-right: 5px; }
+        .cart-item { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 12px; border-radius: 10px; }
+        .cart-item-info h4 { font-family: var(--font-gaming); font-size: 14px; margin-bottom: 4px; }
+        .cart-item-info p { font-size: 14px; color: var(--neon-green); font-weight: 700; }
+        .cart-drawer-footer { padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .cart-total-row { display: flex; justify-content: space-between; font-family: var(--font-gaming); font-size: 18px; margin-bottom: 20px; }
 
-        .feature-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
+        /* Toast Notification */
+        .toast-container { position: fixed; bottom: 30px; right: 30px; z-index: 4000; }
+        .toast-msg { background: var(--bg-card); border: 1px solid var(--neon-green); color: var(--neon-green); padding: 16px 28px; border-radius: 10px; font-family: var(--font-gaming); font-size: 13px; font-weight: 700; box-shadow: 0 0 25px var(--neon-green-glow); transform: translateY(100px); opacity: 0; transition: var(--transition-smooth); }
+        .toast-msg.show { transform: translateY(0); opacity: 1; }
 
-        .feature-card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px 5%;
-            text-align: center;
-            background: var(--darker);
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-        }
-
-        footer span {
-            color: var(--primary);
-        }
+        /* ==========================================================================
+           10. FOOTER
+           ========================================================================== */
+        footer { background: #020305; border-top: 1px solid var(--border-light); padding: 50px 0 30px; margin-top: auto; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
+        .footer-col h4 { font-family: var(--font-gaming); font-size: 16px; color: var(--gold-primary); margin-bottom: 20px; }
+        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: var(--transition-fast); }
+        .footer-links a:hover { color: var(--neon-green); padding-left: 5px; }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: var(--text-muted); }
 
         /* Responsive */
-        @media (max-width: 968px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                height: auto;
-                padding-top: 120px;
-                padding-bottom: 80px;
-            }
-            .hero-btns {
-                justify-content: center;
-            }
-            .hero-image {
-                margin-top: 40px;
-            }
-            nav ul {
-                display: none;
-            }
+        @media (max-width: 1024px) {
+            .story-grid, .contact-box { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-wrapper ul { display: none; }
+            .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Hacker Background Animation Canvas -->
-    <canvas id="hacker-canvas"></canvas>
+    <!-- Cyber Canvas Background -->
+    <canvas id="cyber-canvas"></canvas>
 
-    <!-- Header / Navigation -->
+    <!-- Header -->
     <header>
-        <a href="index.html" class="logo">01_<span>INFINIX</span></a>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Asosiy</a></li>
-                <li><a href="products.html">Mahsulotlar</a></li>
-                <li><a href="about.html">Biz Haqimizda</a></li>
-            </ul>
-        </nav>
-        <button class="cart-btn" onclick="alert('Savatcha bo\'sh!')">
-            <i class="fas fa-shopping-cart"></i> Savatcha
-        </button>
+        <div class="container nav-wrapper">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <div class="logo-text">01_<span>IPHONES</span></div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Bosh Sahifa</a></li>
+                    <li><a href="products.html">PUBG Katalog</a></li>
+                    <li><a href="about.html" class="active">Biz Haqimizda</a></li>
+                </ul>
+            </nav>
+            <button class="cart-trigger" id="cart-open-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Savatcha
+                <span class="cart-badge-count" id="cart-counter">0</span>
+            </button>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">#1 GAMING SMARTPHONES</div>
-            <h1>PUBG 90 FPS <span>INFINIX</span> BILAN</h1>
-            <p>Professional geymerlar uchun maxsus tayyorlangan, kuchli sovitish tizimi va yuqori protsessorli Infinix smartfonlari bilan jangda g'olib bo'ling!</p>
-            <div class="hero-btns">
-                <a href="products.html" class="btn-cyber">Telefonlarni Ko'rish</a>
-                <a href="about.html" class="btn-outline">Batafsil</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <!-- Professional gaming phone illustration / placeholder -->
-            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=600&auto=format&fit=crop" alt="Infinix Gaming Phone">
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <span class="badge-title">Pro Gaming Standards</span>
+            <h1>Kiber-Sport va <span>Biz Haqimizda</span></h1>
+            <p>Biz oddiy do'kon emasmiz. Biz PUBG Mobile kiber-sportchilari va kontent meykertlari uchun eng yuqori kadrlarni ta'minlovchi kafolatli iPhone platformasimiz.</p>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features">
-        <h2 class="section-title">Nega <span>01_Infinix</span>?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fas fa-microchip"></i>
-                <h3>Yuqori FPS</h3>
-                <p>PUBG Mobile va boshqa og'ir o'yinlarda barqaror 90/120 FPS hamda qotishlarsiz o'yin jarayoni.</p>
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container story-grid">
+            <div class="story-content">
+                <h2>O'zbekistondagi №1 <span>PUBG Mobile</span> Smartfon Do'koni</h2>
+                <p>
+                    <strong>01_iphones</strong> loyihasi o'yinlarda kadrlar tushishi (lagging), qizib ketish va giroskop xatolaridan charchagan geymerlar uchun maxsus tashkil etilgan.
+                </p>
+                <p>
+                    Biz har bir telefonni xuddi o'zimiz turnirda o'ynaydigandek sinchiklab tekshiramiz. Bizning do'konimizdan xarid qilingan har bir iPhone 90 FPS va 120 FPS rejimlarini kafolatlangan holda ushlaydi.
+                </p>
+                <a href="products.html" class="btn btn-cyber" style="margin-top: 10px;">
+                    <i class="fa-solid fa-gamepad"></i> Katalogga O'tish
+                </a>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-snowflake"></i>
-                <h3>Sovitish Tizimi</h3>
-                <p>Uzoq muddatli janglarda telefon qizib ketishining oldini oluvchi ilg'or suyuqlik va bug' kamerasi texnologiyasi.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-bolt"></i>
-                <h3>Tezkor Quvvat</h3>
-                <p>120W tezkor zaryadlash qurilmasi yordamida bir necha daqiqada 100% quvvatga ega bo'ling.</p>
+            
+            <div class="story-card-box">
+                <div class="story-badge">100% ORIGINAL</div>
+                <h3 style="font-family: var(--font-gaming); font-size: 22px; color: var(--cyber-cyan); margin-bottom: 15px;">
+                    <i class="fa-solid fa-shield-halved"></i> Bizning Va'damiz
+                </h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px; color: var(--text-secondary); font-size: 14px;">
+                    <li><i class="fa-solid fa-check" style="color: var(--neon-green); margin-right: 10px;"></i> Hech qanday ta'mirlanmagan va almashtirilmagan original qismlar.</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--neon-green); margin-right: 10px;"></i>PUBG Mobile'da 0.5 soniyalik ushlanishlarsiz silliq o'yin jarayoni.</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--neon-green); margin-right: 10px;"></i> Har bir qurilmaga 30 kunlik sinov va almashtirish kafolati.</li>
+                </ul>
             </div>
         </div>
     </section>
+
+    <!-- Testing Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge-title">Quality Assurance</span>
+                <h2>4 Bosqichli <span>Kiber Test</span> Tizimi</h2>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-card">
+                    <span class="step-num">01</span>
+                    <div class="process-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+                    <h3>Giroskop & Touch Test</h3>
+                    <p>Sensorniy ekran va giroskopning aniqligi va kechikishlarsiz (delay-free) ishlashi maxsus test dasturlari orqali tekshiriladi.</p>
+                </div>
+
+                <div class="process-card">
+                    <span class="step-num">02</span>
+                    <div class="process-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                    <h3>Thermal Stress Test</h3>
+                    <p>Telefon PUBG Mobile'da 1 soat davomida ultra grafikada o'ynalib, qizish darajasi va trottling (FPS tushishi) kuzatiladi.</p>
+                </div>
+
+                <div class="process-card">
+                    <span class="step-num">03</span>
+                    <div class="process-icon"><i class="fa-solid fa-battery-charging"></i></div>
+                    <h3>Batareya & Plata</h3>
+                    <p>Batareyaning original holati va quvvat ushlash darajasi tekshirilib, faqat 85% dan yuqori va original modellar tanlanadi.</p>
+                </div>
+
+                <div class="process-card">
+                    <span class="step-num">04</span>
+                    <div class="process-icon"><i class="fa-solid fa-award"></i></div>
+                    <h3>Kiber Sertifikat</h3>
+                    <p>Barcha testlardan muvaffaqiyatli o'tgan smartfonlarga 30 kunlik 01_iphones kafolat brendi beriladi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" id="stat-1">5000+</div>
+                <div class="stat-label">Sotilgan iPhonelar</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="stat-2">99.8%</div>
+                <div class="stat-label">Mamnun O'yinchilar</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="stat-3">120 FPS</div>
+                <div class="stat-label">Maksimal Unumdorlik</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="stat-4">30 Kun</div>
+                <div class="stat-label">Sinov Kafolati</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="badge-title">Pro Gamers Trust</span>
+                <h2>Kiber-Sportchilar <span>Fikri</span></h2>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-text">
+                        "13 Pro Max xarid qilgandim. PUBG'da 90 FPS hech qanday trottlingsiz va qizib ketmasdan barqaror beradi. Giroskop ideal ishlayapti. 01_iphones jamoasiga rahmat!"
+                    </div>
+                    <div class="review-user">
+                        <div class="user-avatar">SR</div>
+                        <div class="user-info">
+                            <h4>Sardor "RAPTOR"</h4>
+                            <p>PMCO Turnir O'yinchisi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-text">
+                        "15 Pro Max oldim. 120 FPS rejimida stream qilaman, umuman lag yo'q. Batareyasi ham uzoqqa yetadi. Kafolati va xizmat ko'rsatish darajasi juda yuqori!"
+                    </div>
+                    <div class="review-user">
+                        <div class="user-avatar">JH</div>
+                        <div class="user-info">
+                            <h4>Jahongir "PUBG_UZ"</h4>
+                            <p>Content Creator / Streamer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-text">
+                        "Telefon yetkazib berilishi tez bo'ldi. O'zim tekshirib ko'rdim, barcha qismlari original va kafolat kartasi ham bor. Barchaga tavsiya qilaman!"
+                    </div>
+                    <div class="review-user">
+                        <div class="user-avatar">AZ</div>
+                        <div class="user-info">
+                            <h4>Azizbek M.</h4>
+                            <p>Toshkent shahri</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-box">
+                <div class="contact-info">
+                    <h3>Savollaringiz Bormi? <span>Biz Bilan Bog'laning</span></h3>
+                    <p>O'zingizga mos modelni tanlashda ikkilanayotgan bo'lsangiz yoki qo'shimcha ma'lumot kerak bo'lsa, mutaxassislarimiz yordam berishadi.</p>
+                    
+                    <ul class="contact-list">
+                        <li><i class="fa-brands fa-telegram"></i> Telegram: @pubg_iphones</li>
+                        <li><i class="fa-solid fa-phone"></i> Telefon: +998 (90) 123-45-67</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Toshkent sh., Chilonzor tumani</li>
+                    </ul>
+                </div>
+
+                <form class="tg-form" onsubmit="sendQuestion(event)">
+                    <input type="text" id="q-name" placeholder="Ismingiz" required>
+                    <input type="tel" id="q-phone" placeholder="Telefon raqamingiz (+998)" required>
+                    <textarea id="q-msg" rows="4" placeholder="Sizni qaysi iPhone modeli qiziqtirmoqda?" required></textarea>
+                    <button type="submit" class="btn btn-cyber" style="width: 100%;">
+                        <i class="fa-paper-plane"></i> Telegram'ga Yuborish
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cart-overlay"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3><i class="fa-solid fa-bag-shopping"></i> Xarid Savatchasi</h3>
+            <button class="cart-close-btn" id="cart-close-btn">&times;</button>
+        </div>
+        <div class="cart-items-list" id="cart-items-container"></div>
+        <div class="cart-drawer-footer">
+            <div class="cart-total-row">
+                <span>Jami Summa:</span>
+                <span id="cart-total-price" style="color: var(--neon-green);">$0</span>
+            </div>
+            <button class="btn btn-cyber" style="width: 100%; background: var(--neon-green); color: #000;" onclick="checkoutTelegram()">
+                <i class="fa-paper-plane"></i> Buyurtma Berish
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container">
+        <div class="toast-msg" id="toast-msg">Habar yuborildi!</div>
+    </div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 <span>01_infinix</span>. Barcha huquqlar himoyalangan. Professional Geymerlar Tanlovi.</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="logo" style="margin-bottom: 20px;">
+                        <div class="logo-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <div class="logo-text">01_<span>IPHONES</span></div>
+                    </a>
+                    <p style="color: var(--text-secondary); font-size: 13px; max-width: 300px;">
+                        O'zbekistondagi professional PUBG Mobile iPhone do'koni. Faqat sinalgan va kafolatli qurilmalar.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Menyu</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Bosh Sahifa</a></li>
+                        <li><a href="products.html">Katalog</a></li>
+                        <li><a href="about.html">Biz Haqimizda</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Bog'lanish</h4>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fa-brands fa-telegram"></i> @pubg_iphones</a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i> @01_iphones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kafolat</h4>
+                    <p style="color:var(--text-secondary); font-size:13px;">Barcha qurilmalarga 30 kunlik sinov kafolati beriladi.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">&copy; 2026 <strong>01_iphones</strong>. Barcha huquqlar himoyalangan.</div>
+        </div>
     </footer>
 
-    <!-- Hacker Matrix / Binary Rain Script -->
+    <!-- JS Logic -->
     <script>
-        const canvas = document.getElementById('hacker-canvas');
+        /* 1. Cyber Canvas Background */
+        const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const characters = '01ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#@$%&*<>[]{}';
-        const fontSize = 14;
-        let columns = Math.floor(canvas.width / fontSize);
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
-
-        function drawHackerBackground() {
-            ctx.fillStyle = 'rgba(5, 5, 8, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00ff66';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = characters.charAt(Math.floor(Math.random() * characters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 45; i++) {
+                particles.push({
+                    x: Math.random() * width, y: Math.random() * height,
+                    r: Math.random() * 1.5 + 0.5,
+                    dx: (Math.random() - 0.5) * 0.5, dy: (Math.random() - 0.5) * 0.5
+                });
             }
         }
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
 
-        setInterval(drawHackerBackground, 33);
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = 'rgba(0, 240, 255, 0.4)';
+            particles.forEach(p => {
+                p.x += p.dx; p.y += p.dy;
+                if (p.x < 0 || p.x > width) p.dx *= -1;
+                if (p.y < 0 || p.y > height) p.dy *= -1;
+                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        /* 2. Global Cart System */
+        let cart = JSON.parse(localStorage.getItem('01_iphones_cart')) || [];
+
+        function removeFromCart(cartId) {
+            cart = cart.filter(item => item.id !== cartId);
+            localStorage.setItem('01_iphones_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const counterEl = document.getElementById('cart-counter');
+            const itemsContainer = document.getElementById('cart-items-container');
+            const totalPriceEl = document.getElementById('cart-total-price');
+
+            counterEl.innerText = cart.length;
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 50px;">Savatchangiz bo\'sh</p>';
+                totalPriceEl.innerText = '$0';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-info" style="flex-grow: 1;">
+                            <h4>${item.title}</h4>
+                            <p>$${item.price}</p>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" style="background:none; border:none; color:var(--apple-red); cursor:pointer; font-size: 16px;">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            itemsContainer.innerHTML = html;
+            totalPriceEl.innerText = '$' + total;
+        }
+
+        /* Cart Drawer UI Controls */
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartDrawer = document.getElementById('cart-drawer');
+
+        document.getElementById('cart-open-btn').addEventListener('click', () => {
+            cartOverlay.classList.add('active'); cartDrawer.classList.add('active');
+        });
+
+        function closeCartDrawer() { cartOverlay.classList.remove('active'); cartDrawer.classList.remove('active'); }
+        document.getElementById('cart-close-btn').addEventListener('click', closeCartDrawer);
+        cartOverlay.addEventListener('click', closeCartDrawer);
+
+        function checkoutTelegram() {
+            if (cart.length === 0) { alert("Savatingiz bo'sh!"); return; }
+            let text = "Assalomu alaykum 01_iphones! Savatchamdagi quyidagi telefonlarni xarid qilmoqchiman:\n\n";
+            let total = 0;
+            cart.forEach((item, index) => {
+                text += `${index + 1}. ${item.title} - $${item.price}\n`;
+                total += item.price;
+            });
+            text += `\nJami summa: $${total}\nIltimos, bog'laning.`;
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        /* 3. Send Question Form to Telegram */
+        function sendQuestion(e) {
+            e.preventDefault();
+            const name = document.getElementById('q-name').value;
+            const phone = document.getElementById('q-phone').value;
+            const msg = document.getElementById('q-msg').value;
+
+            const text = `Yangi Murojaat (Biz Haqimizda sahifasidan):\n\n Ism: ${name}\n Tel: ${phone}\n Savol: ${msg}`;
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(text)}`, '_blank');
+            
+            showToast("Murojaat Telegram'ga yo'naltirildi!");
+            e.target.reset();
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-msg');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 2500);
+        }
+
+        // Initialize Cart UI
+        updateCartUI();
     </script>
 </body>
 </html>
