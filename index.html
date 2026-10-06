@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biz Haqimizda | 01_iphones - Pro Gaming Smartfonlar</title>
+    <title>01_iphones | PUBG Mobile uchun Pro Gaming iPhone Smartfonlari</title>
     
-    <!-- Google Fonts: Orbitron & Plus Jakarta Sans -->
+    <!-- Google Fonts: Orbitron (Cyber/Gaming) & Plus Jakarta Sans (Apple Clean) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
@@ -15,13 +15,14 @@
 
     <style>
         /* ==========================================================================
-           1. CORE DESIGN SYSTEM & VARIABLES
+           1. CORE DESIGN SYSTEM & VARIABLES (CYBER APPLE AESTHETIC)
            ========================================================================== */
         :root {
             --bg-main: #030407;
             --bg-secondary: #0a0d14;
             --bg-card: rgba(15, 20, 32, 0.75);
             --bg-card-hover: rgba(22, 30, 48, 0.85);
+            
             --gold-primary: #ffd700;
             --gold-glow: rgba(255, 215, 0, 0.35);
             --neon-green: #00ff88;
@@ -29,431 +30,1243 @@
             --cyber-cyan: #00f0ff;
             --cyber-cyan-glow: rgba(0, 240, 255, 0.3);
             --apple-red: #ff3b30;
+            
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
+            
             --border-color: rgba(255, 215, 0, 0.18);
-            --border-light: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(0, 255, 136, 0.5);
             
             --font-main: 'Plus Jakarta Sans', sans-serif;
             --font-gaming: 'Orbitron', sans-serif;
             --font-sub: 'Rajdhani', sans-serif;
             
-            --transition-fast: 0.2s ease;
+            --transition-fast: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            --container-width: 1360px;
+            --container-width: 1280px;
         }
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html { scroll-behavior: smooth; font-size: 16px; }
-        
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
         body {
             background-color: var(--bg-main);
             color: var(--text-primary);
             font-family: var(--font-main);
+            line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
             min-height: 100vh;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-primary);
+        }
+
+        /* Background Canvas */
+        #cyber-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Utility Classes */
+        .neon-text-gold {
+            color: var(--gold-primary);
+            text-shadow: 0 0 15px var(--gold-glow);
+        }
+        .neon-text-green {
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green-glow);
+        }
+        .neon-text-cyan {
+            color: var(--cyber-cyan);
+            text-shadow: 0 0 15px var(--cyber-cyan-glow);
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-family: var(--font-gaming);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .badge-gold {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-primary);
+            box-shadow: 0 0 12px var(--gold-glow);
+        }
+        .badge-green {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            box-shadow: 0 0 12px var(--neon-green-glow);
+        }
+
+        /* Buttons System */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-family: var(--font-gaming);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold-primary), #ff9900);
+            color: #000;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, #ffe033, var(--gold-primary));
+        }
+
+        .btn-cyber {
+            background: rgba(0, 255, 136, 0.08);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green-glow);
+        }
+        .btn-cyber:hover {
+            background: var(--neon-green);
+            color: #000;
+            box-shadow: 0 0 30px var(--neon-green);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+        .btn-outline:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(3, 4, 7, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--neon-green));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 22px;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .logo-text {
+            font-family: var(--font-gaming);
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .logo-text span {
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            font-family: var(--font-gaming);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: var(--transition-fast);
+            position: relative;
+            padding: 8px 0;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            box-shadow: 0 0 10px var(--gold-primary);
+            transition: var(--transition-fast);
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .cart-trigger {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 8px;
+            color: var(--gold-primary);
+            font-family: var(--font-gaming);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition-smooth);
+        }
+
+        .cart-trigger:hover {
+            background: var(--gold-primary);
+            color: #000;
+            box-shadow: 0 0 20px var(--gold-glow);
+        }
+
+        .cart-badge-count {
+            background: var(--apple-red);
+            color: #fff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 7px;
+            border-radius: 20px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION WITH 3D SHOWCASE & PUBG STATS
+           ========================================================================== */
+        .hero-section {
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-gaming);
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.15;
+            text-transform: uppercase;
+            margin: 20px 0;
+            letter-spacing: 1px;
+        }
+
+        .hero-content h1 .gradient-text {
+            background: linear-gradient(135deg, #ffffff 20%, var(--gold-primary) 60%, var(--neon-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 35px;
+            max-width: 580px;
+            font-weight: 400;
+        }
+
+        .hero-stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-box h3 {
+            font-family: var(--font-gaming);
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green-glow);
+            margin-bottom: 4px;
+        }
+
+        .stat-box p {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Hero Image Graphic Stage */
+        .hero-graphic {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-stage-glow {
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, var(--gold-glow) 0%, rgba(0, 255, 136, 0.15) 50%, transparent 70%);
+            filter: blur(50px);
+            z-index: 1;
+            animation: stagePulse 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes stagePulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.15); opacity: 1; }
+        }
+
+        .hero-phone-img {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8));
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: var(--transition-smooth);
+        }
+
+        .hero-graphic:hover .hero-phone-img {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.03);
+        }
+
+        /* Floating FPS Overlay Badges */
+        .floating-fps-badge {
+            position: absolute;
+            top: 20%;
+            left: 0;
+            z-index: 3;
+            background: rgba(10, 13, 20, 0.85);
+            border: 1px solid var(--neon-green);
+            backdrop-filter: blur(12px);
+            padding: 12px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.2);
+            animation: floatAnim 3s infinite ease-in-out alternate;
+        }
+
+        .floating-fps-badge-right {
+            position: absolute;
+            bottom: 15%;
+            right: 0;
+            z-index: 3;
+            background: rgba(10, 13, 20, 0.85);
+            border: 1px solid var(--gold-primary);
+            backdrop-filter: blur(12px);
+            padding: 12px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+            animation: floatAnim 3.5s infinite ease-in-out alternate-reverse;
+        }
+
+        @keyframes floatAnim {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
+        }
+
+        /* ==========================================================================
+           4. PUBG BENCHMARK & FPS TESTER WIDGET
+           ========================================================================== */
+        .benchmark-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(10, 13, 20, 0.6) 50%, transparent 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-gaming);
+            font-size: 36px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .benchmark-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .benchmark-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .bm-tab {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-family: var(--font-gaming);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .bm-tab:hover, .bm-tab.active {
+            background: rgba(255, 215, 0, 0.15);
+            border-color: var(--gold-primary);
+            color: var(--gold-primary);
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .bm-display-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .bm-specs-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .bm-spec-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            border-left: 3px solid var(--neon-green);
+        }
+
+        .bm-spec-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .bm-spec-val {
+            font-family: var(--font-gaming);
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .fps-meter-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 35px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+        }
+
+        .fps-number {
+            font-family: var(--font-gaming);
+            font-size: 72px;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-shadow: 0 0 30px var(--neon-green-glow);
+            line-height: 1;
+        }
+
+        .fps-status {
+            font-family: var(--font-sub);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        /* Progress Bar */
+        .fps-bar-outer {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .fps-bar-inner {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--neon-green));
+            box-shadow: 0 0 15px var(--neon-green);
+            transition: width 0.6s ease;
+        }
+
+        /* ==========================================================================
+           5. FEATURED PRODUCTS SHOWCASE (TOP PUBG PHONES)
+           ========================================================================== */
+        .products-section {
+            padding: 100px 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(10px);
+        }
+
+        .product-card:hover {
+            border-color: var(--neon-green);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 255, 136, 0.15);
+        }
+
+        .product-badge-group {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            right: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 5;
+        }
+
+        .product-image-wrap {
+            height: 260px;
+            background: radial-gradient(circle, rgba(255,215,0,0.05) 0%, rgba(0,0,0,0.4) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        .product-image-wrap img {
+            max-height: 210px;
+            object-fit: contain;
+            transition: var(--transition-smooth);
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+        }
+
+        .product-card:hover .product-image-wrap img {
+            transform: scale(1.08) rotate(2deg);
+        }
+
+        .product-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-family: var(--font-gaming);
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .product-features-list {
+            list-style: none;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .product-features-list li {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-features-list li i {
+            color: var(--neon-green);
+            font-size: 12px;
+        }
+
+        .product-bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .product-price {
             display: flex;
             flex-direction: column;
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-main); }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 255, 136, 0.3); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--neon-green); }
-
-        /* Canvas Background */
-        #cyber-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none; opacity: 0.6;
+        .price-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
         }
 
-        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 24px; }
-
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px 28px; border-radius: 8px; font-family: var(--font-gaming);
-            font-size: 13px; font-weight: 800; text-transform: uppercase; cursor: pointer;
-            transition: var(--transition-smooth); border: none; text-decoration: none;
-        }
-        .btn-cyber { background: rgba(0,255,136,0.1); border: 1px solid var(--neon-green); color: var(--neon-green); }
-        .btn-cyber:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green-glow); transform: translateY(-2px); }
-        
-        .badge-title {
-            display: inline-block; padding: 6px 14px; border-radius: 30px;
-            background: rgba(0, 240, 255, 0.1); border: 1px solid var(--cyber-cyan);
-            color: var(--cyber-cyan); font-family: var(--font-gaming); font-size: 11px;
-            font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 15px;
+        .price-value {
+            font-family: var(--font-gaming);
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--gold-primary);
+            text-shadow: 0 0 10px var(--gold-glow);
         }
 
         /* ==========================================================================
-           2. HEADER
+           6. WHY IPHONES FOR PUBG SECTION (ADVANTAGES)
            ========================================================================== */
-        header {
-            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
-            background: rgba(3, 4, 7, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-light);
+        .advantages-section {
+            padding: 90px 0;
+            background: rgba(10, 13, 20, 0.5);
+            border-y: 1px solid var(--border-color);
         }
-        .nav-wrapper { display: flex; align-items: center; justify-content: space-between; height: 80px; }
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .logo-icon {
-            width: 42px; height: 42px; background: linear-gradient(135deg, var(--gold-primary), var(--neon-green));
-            border-radius: 10px; display: flex; align-items: center; justify-content: center;
-            color: #000; font-size: 22px; box-shadow: 0 0 15px var(--gold-glow);
-        }
-        .logo-text { font-family: var(--font-gaming); font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 2px; }
-        .logo-text span { color: var(--gold-primary); text-shadow: 0 0 10px var(--gold-glow); }
-        
-        nav ul { display: flex; gap: 36px; list-style: none; }
-        nav ul li a { font-family: var(--font-gaming); font-size: 13px; font-weight: 700; color: var(--text-secondary); text-decoration: none; padding: 8px 0; position: relative; transition: var(--transition-fast); }
-        nav ul li a:hover, nav ul li a.active { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green-glow); }
-        nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--neon-green); transition: var(--transition-fast); }
-        nav ul li a:hover::after, nav ul li a.active::after { width: 100%; }
 
-        .cart-trigger {
-            background: rgba(0, 255, 136, 0.05); border: 1px solid var(--neon-green); padding: 10px 18px;
-            border-radius: 8px; color: var(--neon-green); font-family: var(--font-gaming); font-size: 13px;
-            font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: var(--transition-smooth);
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
-        .cart-trigger:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px var(--neon-green-glow); }
-        .cart-badge-count { background: var(--apple-red); color: #fff; font-size: 11px; padding: 2px 7px; border-radius: 20px; font-weight: 800; }
 
-        /* ==========================================================================
-           3. PAGE BANNER
-           ========================================================================== */
-        .page-banner {
-            padding: 150px 0 60px;
-            text-align: center;
-            background: radial-gradient(circle at center, rgba(0,240,255,0.08) 0%, transparent 70%);
-            border-bottom: 1px solid var(--border-light);
+        .adv-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 32px;
+            border-radius: 16px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
         }
-        .page-banner h1 {
-            font-family: var(--font-gaming); font-size: 42px; font-weight: 900;
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;
-        }
-        .page-banner h1 span { color: var(--cyber-cyan); text-shadow: 0 0 15px var(--cyber-cyan-glow); }
-        .page-banner p { color: var(--text-secondary); max-width: 650px; margin: 0 auto; font-size: 16px; line-height: 1.6; }
 
-        /* ==========================================================================
-           4. ABOUT STORY SECTION
-           ========================================================================== */
-        .story-section { padding: 90px 0; }
-        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        
-        .story-content h2 { font-family: var(--font-gaming); font-size: 32px; font-weight: 800; margin-bottom: 20px; line-height: 1.3; }
-        .story-content h2 span { color: var(--gold-primary); }
-        .story-content p { color: var(--text-secondary); font-size: 15px; line-height: 1.8; margin-bottom: 20px; }
-        
-        .story-card-box {
-            position: relative; border-radius: 20px; padding: 30px;
-            background: linear-gradient(145deg, rgba(15, 20, 32, 0.9), rgba(5, 8, 15, 0.9));
-            border: 1px solid var(--cyber-cyan); box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+        .adv-card:hover {
+            border-color: var(--gold-primary);
+            transform: translateY(-5px);
+            background: var(--bg-card-hover);
         }
-        .story-badge {
-            position: absolute; top: -15px; right: 30px; background: var(--gold-primary);
-            color: #000; font-family: var(--font-gaming); font-weight: 900; font-size: 12px;
-            padding: 6px 16px; border-radius: 20px; box-shadow: 0 0 15px var(--gold-glow);
+
+        .adv-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid var(--gold-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .adv-card h3 {
+            font-family: var(--font-gaming);
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .adv-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         /* ==========================================================================
-           5. TESTING PROCESS (4-STEP QUALITY CHECK)
+           7. CART DRAWER & SLIDE-OVER MODAL
            ========================================================================== */
-        .process-section { padding: 80px 0; background: rgba(10, 13, 20, 0.6); border-y: 1px solid var(--border-light); }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-family: var(--font-gaming); font-size: 32px; font-weight: 900; text-transform: uppercase; }
-        
-        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
-        .process-card {
-            background: var(--bg-card); border: 1px solid var(--border-light);
-            border-radius: 16px; padding: 30px 25px; position: relative;
-            transition: var(--transition-smooth); overflow: hidden;
+        .cart-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition-smooth);
         }
-        .process-card:hover { border-color: var(--neon-green); transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0, 255, 136, 0.15); }
-        
-        .step-num {
-            font-family: var(--font-gaming); font-size: 48px; font-weight: 900;
-            color: rgba(255,255,255,0.05); position: absolute; top: 15px; right: 20px;
+
+        .cart-drawer-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 440px;
+            height: 100vh;
+            background: #080a10;
+            border-left: 1px solid var(--border-color);
+            z-index: 2001;
+            transition: var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            box-shadow: -15px 0 40px rgba(0,0,0,0.8);
+        }
+
+        .cart-drawer.active {
+            right: 0;
+        }
+
+        .cart-drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-drawer-header h3 {
+            font-family: var(--font-gaming);
+            font-size: 20px;
+            color: var(--gold-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
             transition: var(--transition-fast);
         }
-        .process-card:hover .step-num { color: rgba(0, 255, 136, 0.2); }
-        
-        .process-icon {
-            width: 50px; height: 50px; background: rgba(0, 255, 136, 0.1);
-            border: 1px solid var(--neon-green); border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--neon-green); font-size: 22px; margin-bottom: 20px;
-        }
-        .process-card h3 { font-family: var(--font-gaming); font-size: 18px; margin-bottom: 10px; color: #fff; }
-        .process-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
 
-        /* ==========================================================================
-           6. STATS COUNTER SECTION
-           ========================================================================== */
-        .stats-section { padding: 70px 0; border-bottom: 1px solid var(--border-light); }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
-        .stat-item { background: var(--bg-card); border: 1px solid var(--border-light); padding: 35px 20px; border-radius: 16px; }
-        .stat-number { font-family: var(--font-gaming); font-size: 42px; font-weight: 900; color: var(--gold-primary); text-shadow: 0 0 15px var(--gold-glow); margin-bottom: 5px; }
-        .stat-label { font-size: 13px; color: var(--text-secondary); font-family: var(--font-gaming); text-transform: uppercase; letter-spacing: 1px; }
-
-        /* ==========================================================================
-           7. TESTIMONIALS / ESPORTS AMBASSADORS
-           ========================================================================== */
-        .reviews-section { padding: 90px 0; }
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
-        
-        .review-card {
-            background: var(--bg-card); border: 1px solid var(--border-light);
-            border-radius: 16px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between;
+        .cart-close-btn:hover {
+            color: var(--apple-red);
         }
-        .review-text { font-style: italic; color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin-bottom: 25px; }
-        .review-user { display: flex; align-items: center; gap: 15px; }
-        .user-avatar { width: 45px; height: 45px; border-radius: 50%; background: linear-gradient(135deg, var(--cyber-cyan), var(--neon-green)); display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-family: var(--font-gaming); }
-        .user-info h4 { font-family: var(--font-gaming); font-size: 15px; color: #fff; }
-        .user-info p { font-size: 12px; color: var(--neon-green); font-weight: 600; }
 
-        /* ==========================================================================
-           8. CONTACT & LOCATION SECTION
-           ========================================================================== */
-        .contact-section { padding: 80px 0 100px; }
-        .contact-box {
-            background: linear-gradient(135deg, rgba(10,13,20,0.95), rgba(15,20,32,0.85));
-            border: 1px solid var(--border-color); border-radius: 24px; padding: 50px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
+        .cart-items-list {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
-        .contact-info h3 { font-family: var(--font-gaming); font-size: 28px; margin-bottom: 20px; color: #fff; }
-        .contact-info p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; margin-bottom: 30px; }
-        
-        .contact-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-        .contact-list li { display: flex; align-items: center; gap: 15px; font-size: 15px; color: #fff; }
-        .contact-list i { width: 40px; height: 40px; background: rgba(255,215,0,0.1); border: 1px solid var(--gold-primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--gold-primary); }
 
-        .tg-form { display: flex; flex-direction: column; gap: 15px; }
-        .tg-form input, .tg-form textarea {
-            background: rgba(0,0,0,0.5); border: 1px solid var(--border-light);
-            border-radius: 10px; padding: 14px 18px; color: #fff; font-family: var(--font-main);
-            font-size: 14px; outline: none; transition: var(--transition-fast);
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px;
+            border-radius: 10px;
         }
-        .tg-form input:focus, .tg-form textarea:focus { border-color: var(--neon-green); box-shadow: 0 0 10px rgba(0,255,136,0.2); }
-        
-        /* ==========================================================================
-           9. CART DRAWER (Shared Logic)
-           ========================================================================== */
-        .cart-drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); z-index: 2000; opacity: 0; pointer-events: none; transition: var(--transition-smooth); }
-        .cart-drawer-overlay.active { opacity: 1; pointer-events: all; }
-        .cart-drawer { position: fixed; top: 0; right: -450px; width: 100%; max-width: 440px; height: 100vh; background: #080a10; border-left: 1px solid var(--border-light); z-index: 2001; transition: var(--transition-smooth); display: flex; flex-direction: column; padding: 30px; box-shadow: -15px 0 40px rgba(0,0,0,0.8); }
-        .cart-drawer.active { right: 0; }
-        .cart-drawer-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .cart-drawer-header h3 { font-family: var(--font-gaming); font-size: 20px; color: var(--neon-green); display: flex; align-items: center; gap: 10px; }
-        .cart-close-btn { background: transparent; border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; transition: var(--transition-fast); }
-        .cart-close-btn:hover { color: var(--apple-red); }
-        .cart-items-list { flex-grow: 1; overflow-y: auto; margin: 20px 0; display: flex; flex-direction: column; gap: 16px; padding-right: 5px; }
-        .cart-item { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 12px; border-radius: 10px; }
-        .cart-item-info h4 { font-family: var(--font-gaming); font-size: 14px; margin-bottom: 4px; }
-        .cart-item-info p { font-size: 14px; color: var(--neon-green); font-weight: 700; }
-        .cart-drawer-footer { padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .cart-total-row { display: flex; justify-content: space-between; font-family: var(--font-gaming); font-size: 18px; margin-bottom: 20px; }
+
+        .cart-item-info h4 {
+            font-family: var(--font-gaming);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-info p {
+            font-size: 13px;
+            color: var(--gold-primary);
+            font-weight: 700;
+        }
+
+        .cart-drawer-footer {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-family: var(--font-gaming);
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
 
         /* Toast Notification */
-        .toast-container { position: fixed; bottom: 30px; right: 30px; z-index: 4000; }
-        .toast-msg { background: var(--bg-card); border: 1px solid var(--neon-green); color: var(--neon-green); padding: 16px 28px; border-radius: 10px; font-family: var(--font-gaming); font-size: 13px; font-weight: 700; box-shadow: 0 0 25px var(--neon-green-glow); transform: translateY(100px); opacity: 0; transition: var(--transition-smooth); }
-        .toast-msg.show { transform: translateY(0); opacity: 1; }
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 3000;
+        }
+
+        .toast-msg {
+            background: var(--bg-card);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 16px 28px;
+            border-radius: 10px;
+            font-family: var(--font-gaming);
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 0 25px var(--neon-green-glow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .toast-msg.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
 
         /* ==========================================================================
-           10. FOOTER
+           8. FOOTER SECTION
            ========================================================================== */
-        footer { background: #020305; border-top: 1px solid var(--border-light); padding: 50px 0 30px; margin-top: auto; }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr repeat(3, 1fr); gap: 40px; margin-bottom: 40px; }
-        .footer-col h4 { font-family: var(--font-gaming); font-size: 16px; color: var(--gold-primary); margin-bottom: 20px; }
-        .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-        .footer-links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: var(--transition-fast); }
-        .footer-links a:hover { color: var(--neon-green); padding-left: 5px; }
-        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: var(--text-muted); }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .story-grid, .contact-box { grid-template-columns: 1fr; }
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+        footer {
+            background: #020305;
+            border-top: 1px solid var(--border-color);
+            padding: 70px 0 30px;
+            margin-top: 60px;
         }
-        @media (max-width: 768px) {
-            .nav-wrapper ul { display: none; }
-            .stats-grid { grid-template-columns: 1fr; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-gaming);
+            font-size: 16px;
+            color: var(--gold-primary);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-green);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 38px; }
+            .hero-description { margin: 0 auto 30px; }
+            .hero-stats-row { justify-content: center; }
+            .bm-display-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            nav ul { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-stats-row { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .cart-drawer { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Cyber Canvas Background -->
+    <!-- Cyber Background Animation Canvas -->
     <canvas id="cyber-canvas"></canvas>
 
-    <!-- Header -->
+    <!-- Header Navigation -->
     <header>
         <div class="container nav-wrapper">
             <a href="index.html" class="logo">
                 <div class="logo-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
                 <div class="logo-text">01_<span>IPHONES</span></div>
             </a>
+
             <nav>
                 <ul>
-                    <li><a href="index.html">Bosh Sahifa</a></li>
+                    <li><a href="index.html" class="active">Bosh Sahifa</a></li>
                     <li><a href="products.html">PUBG Katalog</a></li>
-                    <li><a href="about.html" class="active">Biz Haqimizda</a></li>
+                    <li><a href="about.html">Biz Haqimizda</a></li>
                 </ul>
             </nav>
-            <button class="cart-trigger" id="cart-open-btn">
-                <i class="fa-solid fa-cart-shopping"></i> Savatcha
-                <span class="cart-badge-count" id="cart-counter">0</span>
-            </button>
+
+            <div class="header-actions">
+                <button class="cart-trigger" id="cart-open-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Savatcha
+                    <span class="cart-badge-count" id="cart-counter">0</span>
+                </button>
+                <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+            </div>
         </div>
     </header>
 
-    <!-- Page Banner -->
-    <section class="page-banner">
-        <div class="container">
-            <span class="badge-title">Pro Gaming Standards</span>
-            <h1>Kiber-Sport va <span>Biz Haqimizda</span></h1>
-            <p>Biz oddiy do'kon emasmiz. Biz PUBG Mobile kiber-sportchilari va kontent meykertlari uchun eng yuqori kadrlarni ta'minlovchi kafolatli iPhone platformasimiz.</p>
+    <!-- Main Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="badge badge-gold">
+                    <i class="fa-solid fa-bolt"></i> Official PUBG eSports Hardware
+                </div>
+                <h1>PUBG MOBILE UCHUN <br><span class="gradient-text">120 FPS PRO STANTSIYALAR</span></h1>
+                <p class="hero-description">
+                    Original, ideal holatdagi va maxsus PUBG Mobile giroskop hamda sensor sezgirligi sozlangan iPhone smartfonlari. Lag-sizz, kadr yo'qotishlarsiz professional o'yin kafolati.
+                </p>
+
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="products.html" class="btn btn-primary">
+                        <i class="fa-solid fa-gamepad"></i> Model Tanlash
+                    </a>
+                    <a href="#benchmark" class="btn btn-cyber">
+                        <i class="fa-solid fa-chart-line"></i> FPS Testini Ko'rish
+                    </a>
+                </div>
+
+                <div class="hero-stats-row">
+                    <div class="stat-box">
+                        <h3>120 FPS</h3>
+                        <p>Kadrlar Tezligi</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>0.1 ms</h3>
+                        <p>Touch Response</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>100%</h3>
+                        <p>Original Batareya</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-graphic">
+                <div class="phone-stage-glow"></div>
+                <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=800&auto=format&fit=crop" alt="PUBG iPhone 15 Pro Max" class="hero-phone-img">
+                
+                <div class="floating-fps-badge">
+                    <i class="fa-solid fa-fire neon-text-green" style="font-size: 24px;"></i>
+                    <div>
+                        <div style="font-family: var(--font-gaming); font-weight: 800; font-size: 16px; color: var(--neon-green);">120 FPS STABLE</div>
+                        <div style="font-size: 11px; color: var(--text-muted);">Bootcamp Hot-Drop Test Passed</div>
+                    </div>
+                </div>
+
+                <div class="floating-fps-badge-right">
+                    <i class="fa-solid fa-shield-halved neon-text-gold" style="font-size: 24px;"></i>
+                    <div>
+                        <div style="font-family: var(--font-gaming); font-weight: 800; font-size: 16px; color: var(--gold-primary);">NO THROTTLING</div>
+                        <div style="font-size: 11px; color: var(--text-muted);">A17/A18 Pro Bionic Cooling</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Story Section -->
-    <section class="story-section">
-        <div class="container story-grid">
-            <div class="story-content">
-                <h2>O'zbekistondagi №1 <span>PUBG Mobile</span> Smartfon Do'koni</h2>
-                <p>
-                    <strong>01_iphones</strong> loyihasi o'yinlarda kadrlar tushishi (lagging), qizib ketish va giroskop xatolaridan charchagan geymerlar uchun maxsus tashkil etilgan.
-                </p>
-                <p>
-                    Biz har bir telefonni xuddi o'zimiz turnirda o'ynaydigandek sinchiklab tekshiramiz. Bizning do'konimizdan xarid qilingan har bir iPhone 90 FPS va 120 FPS rejimlarini kafolatlangan holda ushlaydi.
-                </p>
-                <a href="products.html" class="btn btn-cyber" style="margin-top: 10px;">
-                    <i class="fa-solid fa-gamepad"></i> Katalogga O'tish
-                </a>
-            </div>
-            
-            <div class="story-card-box">
-                <div class="story-badge">100% ORIGINAL</div>
-                <h3 style="font-family: var(--font-gaming); font-size: 22px; color: var(--cyber-cyan); margin-bottom: 15px;">
-                    <i class="fa-solid fa-shield-halved"></i> Bizning Va'damiz
-                </h3>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px; color: var(--text-secondary); font-size: 14px;">
-                    <li><i class="fa-solid fa-check" style="color: var(--neon-green); margin-right: 10px;"></i> Hech qanday ta'mirlanmagan va almashtirilmagan original qismlar.</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--neon-green); margin-right: 10px;"></i>PUBG Mobile'da 0.5 soniyalik ushlanishlarsiz silliq o'yin jarayoni.</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--neon-green); margin-right: 10px;"></i> Har bir qurilmaga 30 kunlik sinov va almashtirish kafolati.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testing Process Section -->
-    <section class="process-section">
+    <!-- PUBG Benchmark & FPS Tester Section -->
+    <section class="benchmark-section" id="benchmark">
         <div class="container">
             <div class="section-header">
-                <span class="badge-title">Quality Assurance</span>
-                <h2>4 Bosqichli <span>Kiber Test</span> Tizimi</h2>
+                <div class="badge badge-green"><i class="fa-solid fa-microchip"></i> Performance Benchmark</div>
+                <h2>PUBG FPS va Grafika Kalkulyatori</h2>
+                <p>O'zingizga ma'qul iPhone modelini tanlang va PUBG Mobile o'yinidagi aniq ko'rsatkichlarni bilib oling.</p>
             </div>
 
-            <div class="process-grid">
-                <div class="process-card">
-                    <span class="step-num">01</span>
-                    <div class="process-icon"><i class="fa-solid fa-compass-drafting"></i></div>
-                    <h3>Giroskop & Touch Test</h3>
-                    <p>Sensorniy ekran va giroskopning aniqligi va kechikishlarsiz (delay-free) ishlashi maxsus test dasturlari orqali tekshiriladi.</p>
+            <div class="benchmark-card">
+                <div class="benchmark-controls">
+                    <button class="bm-tab active" onclick="switchBenchmark('ip16pm')">iPhone 16 Pro Max</button>
+                    <button class="bm-tab" onclick="switchBenchmark('ip15pm')">iPhone 15 Pro Max</button>
+                    <button class="bm-tab" onclick="switchBenchmark('ip14pm')">iPhone 14 Pro Max</button>
+                    <button class="bm-tab" onclick="switchBenchmark('ip13pm')">iPhone 13 Pro Max</button>
+                    <button class="bm-tab" onclick="switchBenchmark('ip11pm')">iPhone 11 Pro Max</button>
                 </div>
 
-                <div class="process-card">
-                    <span class="step-num">02</span>
-                    <div class="process-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
-                    <h3>Thermal Stress Test</h3>
-                    <p>Telefon PUBG Mobile'da 1 soat davomida ultra grafikada o'ynalib, qizish darajasi va trottling (FPS tushishi) kuzatiladi.</p>
-                </div>
+                <div class="bm-display-grid">
+                    <div class="bm-specs-list">
+                        <div class="bm-spec-item">
+                            <span class="bm-spec-label"><i class="fa-solid fa-microchip neon-text-cyan"></i> Protsessor:</span>
+                            <span class="bm-spec-val" id="bm-chip">Apple A18 Pro (3nm)</span>
+                        </div>
+                        <div class="bm-spec-item">
+                            <span class="bm-spec-label"><i class="fa-solid fa-sliders neon-text-gold"></i> Max Grafika:</span>
+                            <span class="bm-spec-val" id="bm-graphics">Smooth + Ultra Xtreme</span>
+                        </div>
+                        <div class="bm-spec-item">
+                            <span class="bm-spec-label"><i class="fa-solid fa-temperature-arrow-down neon-text-green"></i> O'rtacha Harorat:</span>
+                            <span class="bm-spec-val" id="bm-temp">37.2°C (Cooling Kit)</span>
+                        </div>
+                        <div class="bm-spec-item">
+                            <span class="bm-spec-label"><i class="fa-solid fa-battery-three-quarters neon-text-gold"></i> Batareya Sarfi (1-soat):</span>
+                            <span class="bm-spec-val" id="bm-drain">~14% Sarf</span>
+                        </div>
+                    </div>
 
-                <div class="process-card">
-                    <span class="step-num">03</span>
-                    <div class="process-icon"><i class="fa-solid fa-battery-charging"></i></div>
-                    <h3>Batareya & Plata</h3>
-                    <p>Batareyaning original holati va quvvat ushlash darajasi tekshirilib, faqat 85% dan yuqori va original modellar tanlanadi.</p>
-                </div>
-
-                <div class="process-card">
-                    <span class="step-num">04</span>
-                    <div class="process-icon"><i class="fa-solid fa-award"></i></div>
-                    <h3>Kiber Sertifikat</h3>
-                    <p>Barcha testlardan muvaffaqiyatli o'tgan smartfonlarga 30 kunlik 01_iphones kafolat brendi beriladi.</p>
+                    <div class="fps-meter-container">
+                        <div style="font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Barqaror Kadrlar Soni</div>
+                        <div class="fps-number" id="bm-fps-num">120</div>
+                        <div class="fps-status" id="bm-fps-text">ULTRA EXTREME 120 FPS</div>
+                        <div class="fps-bar-outer">
+                            <div class="fps-bar-inner" id="bm-fps-bar" style="width: 100%;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container stats-grid">
-            <div class="stat-item">
-                <div class="stat-number" id="stat-1">5000+</div>
-                <div class="stat-label">Sotilgan iPhonelar</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="stat-2">99.8%</div>
-                <div class="stat-label">Mamnun O'yinchilar</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="stat-3">120 FPS</div>
-                <div class="stat-label">Maksimal Unumdorlik</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number" id="stat-4">30 Kun</div>
-                <div class="stat-label">Sinov Kafolati</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section class="reviews-section">
+    <!-- Top PUBG iPhones Showcase -->
+    <section class="products-section">
         <div class="container">
             <div class="section-header">
-                <span class="badge-title">Pro Gamers Trust</span>
-                <h2>Kiber-Sportchilar <span>Fikri</span></h2>
+                <div class="badge badge-gold"><i class="fa-solid fa-fire"></i> Ommabop Modellar</div>
+                <h2>PUBG Pro-Geymerlar Tanlovi</h2>
+                <p>Turnirlarda g'alaba qozonish uchun eng mos keladigan top iPhone smartfonlari</p>
             </div>
 
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-text">
-                        "13 Pro Max xarid qilgandim. PUBG'da 90 FPS hech qanday trottlingsiz va qizib ketmasdan barqaror beradi. Giroskop ideal ishlayapti. 01_iphones jamoasiga rahmat!"
+            <div class="products-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="product-badge-group">
+                        <span class="badge badge-green">120 FPS</span>
+                        <span class="badge badge-gold"><i class="fa-solid fa-crown"></i> TOP 1</span>
                     </div>
-                    <div class="review-user">
-                        <div class="user-avatar">SR</div>
-                        <div class="user-info">
-                            <h4>Sardor "RAPTOR"</h4>
-                            <p>PMCO Turnir O'yinchisi</p>
+                    <div class="product-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=600&auto=format&fit=crop" alt="iPhone 16 Pro Max">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 16 Pro Max 256GB</h3>
+                        <ul class="product-features-list">
+                            <li><i class="fa-solid fa-check-circle"></i> Apple A18 Pro Cyber Chip</li>
+                            <li><i class="fa-solid fa-check-circle"></i> PUBG 120 FPS Ultra Smooth</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Batareya Holati: 100% Original</li>
+                        </ul>
+                        <div class="product-bottom-row">
+                            <div class="product-price">
+                                <span class="price-label">Narxi:</span>
+                                <span class="price-value">$1,180</span>
+                            </div>
+                            <button class="btn btn-cyber" onclick="addToCart('iPhone 16 Pro Max 256GB', 1180)">
+                                <i class="fa-solid fa-cart-plus"></i> Savatga
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="review-card">
-                    <div class="review-text">
-                        "15 Pro Max oldim. 120 FPS rejimida stream qilaman, umuman lag yo'q. Batareyasi ham uzoqqa yetadi. Kafolati va xizmat ko'rsatish darajasi juda yuqori!"
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <div class="product-badge-group">
+                        <span class="badge badge-green">120 FPS</span>
+                        <span class="badge badge-gold">POPULAR</span>
                     </div>
-                    <div class="review-user">
-                        <div class="user-avatar">JH</div>
-                        <div class="user-info">
-                            <h4>Jahongir "PUBG_UZ"</h4>
-                            <p>Content Creator / Streamer</p>
+                    <div class="product-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1695048065057-de6300f2824c?q=80&w=600&auto=format&fit=crop" alt="iPhone 15 Pro Max">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 15 Pro Max 256GB</h3>
+                        <ul class="product-features-list">
+                            <li><i class="fa-solid fa-check-circle"></i> Apple A17 Pro (Ray Tracing)</li>
+                            <li><i class="fa-solid fa-check-circle"></i> PUBG 120 FPS Guaranteed</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Batareya Holati: 92% - 98%</li>
+                        </ul>
+                        <div class="product-bottom-row">
+                            <div class="product-price">
+                                <span class="price-label">Narxi:</span>
+                                <span class="price-value">$890</span>
+                            </div>
+                            <button class="btn btn-cyber" onclick="addToCart('iPhone 15 Pro Max 256GB', 890)">
+                                <i class="fa-solid fa-cart-plus"></i> Savatga
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="review-card">
-                    <div class="review-text">
-                        "Telefon yetkazib berilishi tez bo'ldi. O'zim tekshirib ko'rdim, barcha qismlari original va kafolat kartasi ham bor. Barchaga tavsiya qilaman!"
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <div class="product-badge-group">
+                        <span class="badge badge-green">90-120 FPS</span>
+                        <span class="badge badge-gold">BEST VALUE</span>
                     </div>
-                    <div class="review-user">
-                        <div class="user-avatar">AZ</div>
-                        <div class="user-info">
-                            <h4>Azizbek M.</h4>
-                            <p>Toshkent shahri</p>
+                    <div class="product-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1663499482523-1c0c1bae4ce1?q=80&w=600&auto=format&fit=crop" alt="iPhone 13 Pro Max">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 13 Pro Max 128GB</h3>
+                        <ul class="product-features-list">
+                            <li><i class="fa-solid fa-check-circle"></i> Apple A15 Bionic 5-core GPU</li>
+                            <li><i class="fa-solid fa-check-circle"></i> PUBG 90 FPS Ultra Stable</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Batareya Holati: 86% - 91%</li>
+                        </ul>
+                        <div class="product-bottom-row">
+                            <div class="product-price">
+                                <span class="price-label">Narxi:</span>
+                                <span class="price-value">$610</span>
+                            </div>
+                            <button class="btn btn-cyber" onclick="addToCart('iPhone 13 Pro Max 128GB', 610)">
+                                <i class="fa-solid fa-cart-plus"></i> Savatga
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -461,55 +1274,63 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
+    <!-- Why iPhones for PUBG Section -->
+    <section class="advantages-section">
         <div class="container">
-            <div class="contact-box">
-                <div class="contact-info">
-                    <h3>Savollaringiz Bormi? <span>Biz Bilan Bog'laning</span></h3>
-                    <p>O'zingizga mos modelni tanlashda ikkilanayotgan bo'lsangiz yoki qo'shimcha ma'lumot kerak bo'lsa, mutaxassislarimiz yordam berishadi.</p>
-                    
-                    <ul class="contact-list">
-                        <li><i class="fa-brands fa-telegram"></i> Telegram: @pubg_iphones</li>
-                        <li><i class="fa-solid fa-phone"></i> Telefon: +998 (90) 123-45-67</li>
-                        <li><i class="fa-solid fa-location-dot"></i> Toshkent sh., Chilonzor tumani</li>
-                    </ul>
+            <div class="section-header">
+                <div class="badge badge-green"><i class="fa-solid fa-shield-cat"></i> Pro-Geymer Afzalliklari</div>
+                <h2>Nima Uchun Aynan iPhone va 01_iphones?</h2>
+                <p>Android smartfonlaridan ustun bo'lgan texnik va o'yin ko'rsatkichlari</p>
+            </div>
+
+            <div class="adv-grid">
+                <div class="adv-card">
+                    <div class="adv-icon"><i class="fa-solid fa-bullseye"></i></div>
+                    <h3>0.1ms Touch Sensor Latency</h3>
+                    <p>iPhone ekranining sensor sezgirligi va 3D Touch/Haptic javob berish tezligi dushman bilan to'qnashuvda birinchi bo'lib o'q uzishingizni ta'minlaydi.</p>
                 </div>
 
-                <form class="tg-form" onsubmit="sendQuestion(event)">
-                    <input type="text" id="q-name" placeholder="Ismingiz" required>
-                    <input type="tel" id="q-phone" placeholder="Telefon raqamingiz (+998)" required>
-                    <textarea id="q-msg" rows="4" placeholder="Sizni qaysi iPhone modeli qiziqtirmoqda?" required></textarea>
-                    <button type="submit" class="btn btn-cyber" style="width: 100%;">
-                        <i class="fa-paper-plane"></i> Telegram'ga Yuborish
-                    </button>
-                </form>
+                <div class="adv-card">
+                    <div class="adv-icon"><i class="fa-solid fa-compass"></i></div>
+                    <h3>Ultra Aniqlikdagi Giroskop</h3>
+                    <p>PUBG turnirlarida eng muhim bo'lgan iPhone giroskop datchigi mutlaqo kechikishlarsiz ishlaydi va spreyni (recoil) mukammal ushlashga yordam beradi.</p>
+                </div>
+
+                <div class="adv-card">
+                    <div class="adv-icon"><i class="fa-solid fa-snowflake"></i></div>
+                    <h3>No Thermal Throttling</h3>
+                    <p>Biz sotadigan barcha telefonlar o'yinga mos ravishda testdan o'tkaziladi va Bootcamplarda ramka kadr tushishi (FPS Drop) kuzatilmaydi.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Cart Drawer -->
+    <!-- Slide-over Cart Drawer Modal -->
     <div class="cart-drawer-overlay" id="cart-overlay"></div>
     <div class="cart-drawer" id="cart-drawer">
         <div class="cart-drawer-header">
             <h3><i class="fa-solid fa-bag-shopping"></i> Xarid Savatchasi</h3>
             <button class="cart-close-btn" id="cart-close-btn">&times;</button>
         </div>
-        <div class="cart-items-list" id="cart-items-container"></div>
+
+        <div class="cart-items-list" id="cart-items-container">
+            <p style="text-align: center; color: var(--text-muted); margin-top: 50px;">Savatchangiz hozircha bo'sh</p>
+        </div>
+
         <div class="cart-drawer-footer">
             <div class="cart-total-row">
                 <span>Jami Summa:</span>
-                <span id="cart-total-price" style="color: var(--neon-green);">$0</span>
+                <span id="cart-total-price" style="color: var(--gold-primary);">$0</span>
             </div>
-            <button class="btn btn-cyber" style="width: 100%; background: var(--neon-green); color: #000;" onclick="checkoutTelegram()">
-                <i class="fa-paper-plane"></i> Buyurtma Berish
+            <button class="btn btn-primary" style="width: 100%;" onclick="checkoutTelegram()">
+                <i class="fa-paper-plane"></i> Telegram Orqali Buyurtma
             </button>
         </div>
     </div>
 
-    <!-- Toast Notification -->
+    <!-- Toast Banner Notification -->
     <div class="toast-container">
-        <div class="toast-msg" id="toast-msg">Habar yuborildi!</div>
+        <div class="toast-msg" id="toast-msg">Mahsulot savatga qo'shildi!</div>
     </div>
 
     <!-- Footer -->
@@ -521,93 +1342,230 @@
                         <div class="logo-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
                         <div class="logo-text">01_<span>IPHONES</span></div>
                     </a>
-                    <p style="color: var(--text-secondary); font-size: 13px; max-width: 300px;">
-                        O'zbekistondagi professional PUBG Mobile iPhone do'koni. Faqat sinalgan va kafolatli qurilmalar.
+                    <p style="color: var(--text-secondary); font-size: 14px; max-width: 320px;">
+                        O'zbekistondagi №1 Professional PUBG Mobile iPhone Do'koni. Turnirlar va PUBG eSports darajasidagi smartfonlar yetkazib beramiz.
                     </p>
                 </div>
+
                 <div class="footer-col">
-                    <h4>Menyu</h4>
+                    <h4>Navigatsiya</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">Bosh Sahifa</a></li>
-                        <li><a href="products.html">Katalog</a></li>
+                        <li><a href="products.html">PUBG Katalog</a></li>
                         <li><a href="about.html">Biz Haqimizda</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
-                    <h4>Bog'lanish</h4>
+                    <h4>Top Modellar</h4>
                     <ul class="footer-links">
-                        <li><a href="#"><i class="fa-brands fa-telegram"></i> @pubg_iphones</a></li>
-                        <li><a href="#"><i class="fa-brands fa-instagram"></i> @01_iphones</a></li>
+                        <li><a href="products.html">iPhone 16 Pro Max</a></li>
+                        <li><a href="products.html">iPhone 15 Pro Max</a></li>
+                        <li><a href="products.html">iPhone 13 Pro Max</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-col">
-                    <h4>Kafolat</h4>
-                    <p style="color:var(--text-secondary); font-size:13px;">Barcha qurilmalarga 30 kunlik sinov kafolati beriladi.</p>
+                    <h4>Aloqa & Kafolat</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://t.me/" target="_blank"><i class="fa-brands fa-telegram"></i> Telegram Rasmiy Kanal</a></li>
+                        <li><a href="#"><i class="fa-solid fa-shield"></i> 30 Kunlik Sinov Kafolati</a></li>
+                        <li><a href="#"><i class="fa-solid fa-truck"></i> O'zbekiston Bo'ylab Yetkazish</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-bottom">&copy; 2026 <strong>01_iphones</strong>. Barcha huquqlar himoyalangan.</div>
+
+            <div class="footer-bottom">
+                &copy; 2026 <strong>01_iphones</strong>. Barcha huquqlar himoyalangan. Professional Gaming Hardware.
+            </div>
         </div>
     </footer>
 
-    <!-- JS Logic -->
+    <!-- Interactive JavaScript Engine -->
     <script>
-        /* 1. Cyber Canvas Background */
+        /* ==========================================================================
+           1. HACKER/CYBER CANVAS BACKGROUND ANIMATION
+           ========================================================================== */
         const canvas = document.getElementById('cyber-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
 
-        function initCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            particles = [];
-            for (let i = 0; i < 45; i++) {
-                particles.push({
-                    x: Math.random() * width, y: Math.random() * height,
-                    r: Math.random() * 1.5 + 0.5,
-                    dx: (Math.random() - 0.5) * 0.5, dy: (Math.random() - 0.5) * 0.5
-                });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        const particleCount = 45;
+
+        class CyberParticle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.color = Math.random() > 0.5 ? '#ffd700' : '#00ff88';
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
             }
         }
-        window.addEventListener('resize', initCanvas);
-        initCanvas();
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new CyberParticle());
+        }
 
         function animateCanvas() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'rgba(0, 240, 255, 0.4)';
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Connect nearby particles with lines
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a + 1; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 130) {
+                        ctx.strokeStyle = 'rgba(255, 215, 0, ' + (1 - dist / 130) * 0.15 + ')';
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
             particles.forEach(p => {
-                p.x += p.dx; p.y += p.dy;
-                if (p.x < 0 || p.x > width) p.dx *= -1;
-                if (p.y < 0 || p.y > height) p.dy *= -1;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+                p.update();
+                p.draw();
             });
             requestAnimationFrame(animateCanvas);
         }
         animateCanvas();
 
-        /* 2. Global Cart System */
+        /* ==========================================================================
+           2. PUBG BENCHMARK WIDGET LOGIC
+           ========================================================================== */
+        const benchmarkData = {
+            ip16pm: {
+                chip: "Apple A18 Pro (3nm Cyber)",
+                graphics: "Smooth + Ultra Xtreme (120 FPS)",
+                temp: "36.8°C (Cooling Ready)",
+                drain: "~12% Sarf / Soat",
+                fps: "120",
+                fpsText: "ULTRA EXTREME 120 FPS",
+                barWidth: "100%"
+            },
+            ip15pm: {
+                chip: "Apple A17 Pro (3nm)",
+                graphics: "Smooth + Ultra Xtreme (120 FPS)",
+                temp: "38.5°C",
+                drain: "~15% Sarf / Soat",
+                fps: "120",
+                fpsText: "CONSTANT 120 FPS",
+                barWidth: "98%"
+            },
+            ip14pm: {
+                chip: "Apple A16 Bionic (4nm)",
+                graphics: "Smooth + Extreme (90 FPS)",
+                temp: "39.1°C",
+                drain: "~16% Sarf / Soat",
+                fps: "90",
+                fpsText: "EXTREME 90 FPS",
+                barWidth: "78%"
+            },
+            ip13pm: {
+                chip: "Apple A15 Bionic (5nm)",
+                graphics: "Smooth + Extreme (90 FPS)",
+                temp: "37.9°C",
+                drain: "~14% Sarf / Soat",
+                fps: "90",
+                fpsText: "EXTREME 90 FPS STABLE",
+                barWidth: "78%"
+            },
+            ip11pm: {
+                chip: "Apple A13 Bionic",
+                graphics: "Smooth + Extreme (60 FPS)",
+                temp: "41.0°C",
+                drain: "~20% Sarf / Soat",
+                fps: "60",
+                fpsText: "BALANCED 60 FPS",
+                barWidth: "55%"
+            }
+        };
+
+        function switchBenchmark(key) {
+            document.querySelectorAll('.bm-tab').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const data = benchmarkData[key];
+            document.getElementById('bm-chip').innerText = data.chip;
+            document.getElementById('bm-graphics').innerText = data.graphics;
+            document.getElementById('bm-temp').innerText = data.temp;
+            document.getElementById('bm-drain').innerText = data.drain;
+            document.getElementById('bm-fps-num').innerText = data.fps;
+            document.getElementById('bm-fps-text').innerText = data.fpsText;
+            document.getElementById('bm-fps-bar').style.width = data.barWidth;
+        }
+
+        /* ==========================================================================
+           3. CART STATE & LOCALSTORAGE TIZIMI
+           ========================================================================== */
         let cart = JSON.parse(localStorage.getItem('01_iphones_cart')) || [];
 
-        function removeFromCart(cartId) {
-            cart = cart.filter(item => item.id !== cartId);
-            localStorage.setItem('01_iphones_cart', JSON.stringify(cart));
+        function addToCart(title, price) {
+            cart.push({ id: Date.now(), title, price });
+            saveCart();
+            updateCartUI();
+            showToast(`${title} savatga qo'shildi!`);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
             updateCartUI();
         }
 
+        function saveCart() {
+            localStorage.setItem('01_iphones_cart', JSON.stringify(cart));
+        }
+
         function updateCartUI() {
-            const counterEl = document.getElementById('cart-counter');
+            const counter = document.getElementById('cart-counter');
             const itemsContainer = document.getElementById('cart-items-container');
             const totalPriceEl = document.getElementById('cart-total-price');
 
-            counterEl.innerText = cart.length;
+            counter.innerText = cart.length;
 
             if (cart.length === 0) {
-                itemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 50px;">Savatchangiz bo\'sh</p>';
+                itemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted); margin-top: 50px;">Savatchangiz hozircha bo\'sh</p>';
                 totalPriceEl.innerText = '$0';
                 return;
             }
 
             let html = '';
             let total = 0;
+
             cart.forEach(item => {
                 total += item.price;
                 html += `
@@ -622,56 +1580,58 @@
                     </div>
                 `;
             });
+
             itemsContainer.innerHTML = html;
             totalPriceEl.innerText = '$' + total;
         }
 
-        /* Cart Drawer UI Controls */
+        /* Cart Drawer Slide Controls */
         const cartOverlay = document.getElementById('cart-overlay');
         const cartDrawer = document.getElementById('cart-drawer');
 
         document.getElementById('cart-open-btn').addEventListener('click', () => {
-            cartOverlay.classList.add('active'); cartDrawer.classList.add('active');
+            cartOverlay.classList.add('active');
+            cartDrawer.classList.add('active');
         });
 
-        function closeCartDrawer() { cartOverlay.classList.remove('active'); cartDrawer.classList.remove('active'); }
-        document.getElementById('cart-close-btn').addEventListener('click', closeCartDrawer);
-        cartOverlay.addEventListener('click', closeCartDrawer);
+        document.getElementById('cart-close-btn').addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
 
-        function checkoutTelegram() {
-            if (cart.length === 0) { alert("Savatingiz bo'sh!"); return; }
-            let text = "Assalomu alaykum 01_iphones! Savatchamdagi quyidagi telefonlarni xarid qilmoqchiman:\n\n";
-            let total = 0;
-            cart.forEach((item, index) => {
-                text += `${index + 1}. ${item.title} - $${item.price}\n`;
-                total += item.price;
-            });
-            text += `\nJami summa: $${total}\nIltimos, bog'laning.`;
-            window.open(`https://t.me/share/url?url=${encodeURIComponent(text)}`, '_blank');
+        function closeCart() {
+            cartOverlay.classList.remove('active');
+            cartDrawer.classList.remove('active');
         }
 
-        /* 3. Send Question Form to Telegram */
-        function sendQuestion(e) {
-            e.preventDefault();
-            const name = document.getElementById('q-name').value;
-            const phone = document.getElementById('q-phone').value;
-            const msg = document.getElementById('q-msg').value;
-
-            const text = `Yangi Murojaat (Biz Haqimizda sahifasidan):\n\n Ism: ${name}\n Tel: ${phone}\n Savol: ${msg}`;
-            window.open(`https://t.me/share/url?url=${encodeURIComponent(text)}`, '_blank');
-            
-            showToast("Murojaat Telegram'ga yo'naltirildi!");
-            e.target.reset();
-        }
-
+        /* Toast Message Notification */
         function showToast(msg) {
             const toast = document.getElementById('toast-msg');
             toast.innerText = msg;
             toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 2500);
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
         }
 
-        // Initialize Cart UI
+        /* Telegram Checkout URL Generator */
+        function checkoutTelegram() {
+            if (cart.length === 0) {
+                alert("Savatchangiz bo'sh! Iltimos, xarid qilish uchun telefon tanlang.");
+                return;
+            }
+
+            let text = "Assalomu alaykum 01_iphones! Men Bosh sahifangizdan quyidagi PUBG smartfonlarini zakaz qilmoqchiman:\n\n";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                text += `${index + 1}. ${item.title} - $${item.price}\n`;
+                total += item.price;
+            });
+
+            text += `\nJami summa: $${total}\nIltimos, yetkazib berish shartlarini ma'lum qiling!`;
+            window.open(`https://t.me/share/url?url=${encodeURIComponent(text)}`, '_blank');
+        }
+
+        // Initialize UI on load
         updateCartUI();
     </script>
 </body>
